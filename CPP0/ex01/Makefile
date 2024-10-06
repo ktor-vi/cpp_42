@@ -1,9 +1,12 @@
-NAME = megaphone
+NAME = phonebook
 BONUS =
 
-SRC =  src/Megaphone.cpp                 \
+SRC =  src/Phonebook.cpp                 \
+	   src/Contact.cpp                   \
+	   src/main.cpp
 
-INC =
+INC = includes/Phonebook.hpp               \
+	  includes/Contact.hpp
 
 CC = c++
 
