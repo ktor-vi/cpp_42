@@ -3,11 +3,15 @@
 
 class Phonebook {
 public:
-    Contact contacts[8];
-    int count;
     Phonebook();
     ~Phonebook();
-    void addContact(Contact *contacts, int *count);
-    void printPhonebook(Contact *contacts);
+    void addContact(int *count);
+    void printPhonebook(void);
+    Contact getContact(int index);
+    void setContact(Contact contact, int index);
+    std::string truncate(std::string str);
+
+private:
+    Contact _contacts[8];
 };
 #endif
