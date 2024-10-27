@@ -1,7 +1,7 @@
 #include "../includes/HumanA.hpp"
 #include "../includes/HumanB.hpp"
 #include "../includes/Weapon.hpp"
-#include <iostream>
+
 int main() {
   {
     Weapon club = Weapon("crude spiked club");
@@ -17,7 +17,6 @@ int main() {
     jim.attack();
     club.setType("some other type of club");
     jim.attack();
-    std::cout << club.getType();
   }
   return 0;
 }
