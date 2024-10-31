@@ -1,74 +1,61 @@
-NAME = phonebook
-BONUS =
+# Nom de l'exécutable
+TARGET = phonebook
+# Compilateur et options de compilation
+CXX = c++
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -O2
+LDFLAGS =
 
-SRC =  src/Phonebook.cpp                 \
-	   src/Contact.cpp                   \
-	   src/main.cpp
+# Couleurs
+GREEN = \033[1;32m
+YELLOW = \033[1;33m
+BLUE = \033[1;34m
+RED = \033[1;31m
+NC = \033[0m
 
-INC = includes/Phonebook.hpp               \
-	  includes/Contact.hpp
+# Dossiers
+SRC_DIR = src
+BUILD_DIR = objs
 
-CC = c++
+# Fichiers sources et objets
+SOURCES = $(wildcard $(SRC_DIR)/*.cpp)
+OBJECTS = $(patsubst $(SRC_DIR)/%.cpp, $(BUILD_DIR)/%.o, $(SOURCES))
 
-FLAGS = -Wall -Wextra -Werror
+# Nombre total de fichiers à compiler (pour la barre de progression)
+TOTAL = $(words $(SOURCES))
 
+# Compilation
+all: $(TARGET)
 
-OBJS := $(patsubst src/%.c, objs/%.o, ${SRC})
+$(TARGET): $(OBJECTS)
+	@echo  "$(BLUE)Linking...$(NC)"
+	@$(CXX) $(OBJECTS) -o $@ $(LDFLAGS)
+	@echo  "$(GREEN)Done!$(NC)"
 
-DEPS := $(INC)
+# Compilation des fichiers objets avec une barre de progression
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp | $(BUILD_DIR)
+	$(eval CURRENT := $(shell echo $$(($(PROGRESS)+1))))
+	@echo  "$(YELLOW)[$(CURRENT)/$(TOTAL)] Compiling $<... $(NC)"
+	@$(CXX) $(CXXFLAGS) -c $< -o $@
+	@echo  "$(GREEN)OK$(NC)"
+	$(eval PROGRESS := $(CURRENT))
 
-GREEN := \033[1;32m
-YELLOW := \033[1;33m
-CYAN := \033[1;36m
-CLR_RMV := \033[0m
-RED		:= \033[1;31m
+# Crée le dossier build si nécessaire
+$(BUILD_DIR):
+	@mkdir -p $@
 
-total_files := $(words $(SRC))
-current_file := 0
-progress := 0
+# Nettoyage
+clean:
+	@echo  "$(RED)Cleaning objects...$(NC)"
+	@rm -rf $(BUILD_DIR)/*.o $(TARGET)
+	@echo  "$(GREEN)Cleaned!$(NC)"
 
-define progress_bar
-@$(eval current_file=$(shell echo $$(($(current_file) + 1))))
-@$(eval progress=$(shell echo $$(($(current_file) * 100 / $(total_files)))))
-@printf "\r$(GREEN)Compiling $(YELLOW)%s$(CLR_RMV)... [%-3d%%] %d/%d $(CYAN)" $< $(progress) $(current_file) $(total_files)
-endef
-
-define print_completion
-@printf "\n$(GREEN)Compilation of $(YELLOW)$(NAME) $(GREEN)complete ✔️\n$(CLR_RMV)"
-endef
-
-
-
-.PHONY: all clean fclean nothing nothingb bonus re
-
-all: nothing $(NAME)
-
-bonus: nothing $(BONUS)
+fclean:	clean
+	@echo  "$(RED)Cleaning binary...$(NC)"
+	@rm -rf $(TARGET)
+	@echo  "$(GREEN)Cleaned!$(NC)"
 
 re: fclean all
+# Variables pour le suivi de la progression
+PROGRESS := 0
 
-objs/%.o:    src/%.c
-	@mkdir -p objs
-	@$(CC) $(FLAGS) $(INC) -o $@ -c $<
-	@$(call progress_bar)
-
-
-clean:
-	@rm -rf $(OBJS)
-	@echo "$(GREEN)Deleting $(YELLOW)$(NAME)$(CLR_RMV) objs ✔️"
-
-fclean: clean
-	@rm -rf $(NAME)
-	@echo "$(GREEN)Deleting $(YELLOW)$(NAME)$(CLR_RMV) binary ✔️"
-
-$(NAME): $(OBJS)
-	@echo "$(YELLOW)Done!$(CLR_RMV)"
-	@$(CC) $(FLAGS)  $(OBJS)  $(LIBS) -o $@
-	@$(call print_completion)
-
-nothing:
-	@mkdir -p objs
-	@if [ -f "$(NAME)" ] && [ -z "$$(find $(SRC) -newer $(NAME))" ]; then \
-		echo "$(CYAN)Nothing has been updated.$(CLR_RMV)"; \
-		fi
-.PHONY: all re clean fclean nothing  bonus
+.PHONY: all clean fclean re

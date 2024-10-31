@@ -1,5 +1,8 @@
 #include "../includes/Phonebook.hpp"
 #include <iostream>
+#include <climits>
+#include <cstdlib>
+
 Phonebook::Phonebook(void)
 {
     Contact contacts[8];
@@ -68,12 +71,15 @@ void Phonebook::printPhonebook(void) {
     int index;
     std::cout << "Enter index: ";
     std::cin >> index;
+    if(std::cin.eof())
+      exit(1);
     if (index >= 0 && index < 8) {
         std::cout << "First name: " << getContact(index).getFirstName() << std::endl;
         std::cout << "Last name: " << getContact(index).getLastName() << std::endl;
         std::cout << "Nick name: " << getContact(index).getNickName() << std::endl;
         std::cout << "Phone number: " << getContact(index).getPhoneNumber() << std::endl;
         std::cout << "Darkest secret: " << getContact(index).getDarkestSecret() << std::endl;
+        std::cin.ignore(INT_MAX ,'\n');
     } else {
         std::cout << "Invalid index" << std::endl;
     }
