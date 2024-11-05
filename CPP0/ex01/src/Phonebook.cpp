@@ -74,8 +74,6 @@ void Phonebook::printPhonebook(void) {
   if(std::cin.eof())
     exit(1);
   index = std::atoi(indexStr.c_str());
-
-  std::cout << index;
   if (index > 0 && index <= 8) {
     std::cout << "First name: " << getContact(index - 1).getFirstName() << std::endl;
     std::cout << "Last name: " << getContact(index - 1).getLastName() << std::endl;
