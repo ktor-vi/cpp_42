@@ -1,9 +1,8 @@
 # Nom de l'exécutable
-TARGET = Bureaucrat
+TARGET = Animals
 # Compilateur et options de compilation
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -O2
-LDFLAGS =
 
 # Couleurs
 GREEN = \033[1;32m
@@ -28,7 +27,7 @@ all: $(TARGET)
 
 $(TARGET): $(OBJECTS)
 	@echo  "$(BLUE)Linking...$(NC)"
-	@$(CXX) $(OBJECTS) -o $@ $(LDFLAGS)
+	@$(CXX) $(OBJECTS) -o $@ 
 	@echo  "$(GREEN)Done!$(NC)"
 
 # Compilation des fichiers objets avec une barre de progression

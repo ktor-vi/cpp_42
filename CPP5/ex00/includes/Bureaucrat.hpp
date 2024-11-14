@@ -3,27 +3,30 @@
 #include <string>
 class Bureaucrat {
 private:
-  std::string const _name;
+  const std::string _name;
   int _grade;
 
 public:
-  Bureaucrat();
+  Bureaucrat(std::string name, int grade);
   Bureaucrat(const Bureaucrat &rhs);
-  Bureaucrat operator=(const Bureaucrat &rhs);
-  Bureaucrat operator++(void);
-  Bureaucrat operator--(void);
+  Bureaucrat &operator=(const Bureaucrat &rhs);
   virtual ~Bureaucrat();
-  int getGrade();
-  std::string getName();
+  void incrementGrade();
+  void decrementGrade();
+  int getGrade() const;
+  std::string getName() const;
 
   class GradeTooLowException : public std::exception {
   public:
-    std::string what();
+    virtual const char *what() const throw();
   };
 
   class GradeTooHighException : public std::exception {
   public:
-    std::string what();
+    virtual const char *what() const throw();
   };
 };
+
+std::ostream &operator<<(std::ostream &os, Bureaucrat const &rhs);
+
 #endif
