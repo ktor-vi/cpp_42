@@ -153,20 +153,24 @@ Fixed  Fixed::operator/(const Fixed &rhs)
   return n;
 }
 
-void Fixed::operator++(void){
+Fixed Fixed::operator++(void){
   this->_raw = this->_raw + (1 << this->_fixed);
+  return(*this);
 }
 
-void Fixed::operator--(void){
+Fixed Fixed::operator--(void){
   this->_raw = this->_raw - (1 << this->_fixed);
+  return(*this);
 }
 
-void Fixed::operator++(int){
+Fixed Fixed::operator++(int){
   this->_raw = this->_raw + (1 << this->_fixed);
+  return(*this);
 }
 
-void Fixed::operator--(int){
+Fixed Fixed::operator--(int){
   this->_raw = this->_raw - (1 << this->_fixed);
+  return(*this);
 }
 
 

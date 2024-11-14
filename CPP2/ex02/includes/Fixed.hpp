@@ -27,10 +27,10 @@ public:
   Fixed  operator*(const Fixed& rhs);
   Fixed  operator/(const Fixed& rhs);
 
-  void  operator++(void);
-  void  operator--(void);
-  void  operator++(int);
-  void  operator--(int);
+  Fixed  operator++(void);
+  Fixed  operator--(void);
+  Fixed  operator++(int);
+  Fixed  operator--(int);
 
   int getRawBits(void) const;
   void setRawBits(const int raw);
