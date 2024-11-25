@@ -9,7 +9,7 @@ ScavTrap::ScavTrap(std::string name) {
   this->_attackDamage = 20;
 }
 
-ScavTrap::ScavTrap(const ScavTrap &rhs) {
+ScavTrap::ScavTrap(const ScavTrap &rhs) : ClapTrap() {
   std::cout << "ScavTrap Copy Constructor called" << std::endl;
   *this = rhs;
 }
@@ -27,6 +27,12 @@ ScavTrap &ScavTrap::operator=(const ScavTrap &rhs) {
 
 ScavTrap::~ScavTrap() {
   std::cout << "ScavTrap Destructor called" << std::endl;
+}
+
+void ScavTrap::attack(const std::string &target) {
+  std::cout << "ScavTrap " << this->_name << " attacks " << target
+            << " , causing " << this->_attackDamage << " points of damage!"
+            << std::endl;
 }
 
 void ScavTrap::guardGate() {

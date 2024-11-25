@@ -4,14 +4,12 @@
 #include <iostream>
 int main()
 {
-  const Animal *arr[4];
+  const Animal *arr[2];
 
   arr[0] = new Dog();
-  arr[1] = new Dog();
-  arr[2] = new Cat();
-  arr[3] = new Cat();
+  arr[1] = new Cat();
 
-  for(int i = 0; i < 4; i++)
+  for(int i = 0; i < 2; i++)
     delete arr[i];
   
   const Cat *cat = new Cat();

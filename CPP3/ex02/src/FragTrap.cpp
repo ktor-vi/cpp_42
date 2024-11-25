@@ -9,7 +9,7 @@ FragTrap::FragTrap(std::string name) {
   this->_attackDamage = 30;
 }
 
-FragTrap::FragTrap(const FragTrap &rhs) {
+FragTrap::FragTrap(const FragTrap &rhs) : ClapTrap() {
   std::cout << "FragTrap Copy Constructor called" << std::endl;
   *this = rhs;
 }
@@ -27,6 +27,12 @@ FragTrap &FragTrap::operator=(const FragTrap &rhs) {
 
 FragTrap::~FragTrap() {
   std::cout << "FragTrap Destructor called" << std::endl;
+}
+
+void FragTrap::attack(const std::string &target) {
+  std::cout << "FragTrap " << this->_name << " attacks " << target
+            << " , causing " << this->_attackDamage << " points of damage!"
+            << std::endl;
 }
 
 void FragTrap::highFiveGuys(void) {

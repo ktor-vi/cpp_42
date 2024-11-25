@@ -1,7 +1,7 @@
 #include "../includes/ClapTrap.hpp"
 #include <iostream>
 
-ClapTrap::ClapTrap() { std::cout << "Default Constructor called" << std::endl; }
+ClapTrap::ClapTrap() { std::cout << "ClapTrap Default Constructor called" << std::endl; }
 
 ClapTrap::ClapTrap(std::string name) {
   std::cout << "ClapTrap Name Constructor called" << std::endl;
@@ -38,11 +38,13 @@ void ClapTrap::attack(const std::string &target) {
 }
 
 void ClapTrap::takeDamage(unsigned int amount) {
+  this->_hitPoints -= amount;
   std::cout << "ClapTrap " << this->_name << " takes " << amount
             << " points of damage!" << std::endl;
 }
 
 void ClapTrap::beRepaired(unsigned int amount) {
+  this->_hitPoints += amount;
   std::cout << "ClapTrap " << this->_name << " repairs and gains " << amount
             << " hit points!" << std::endl;
 }
