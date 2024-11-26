@@ -1,5 +1,5 @@
 # Nom de l'exécutable
-TARGET = Convert
+TARGET = Detect
 # Compilateur et options de compilation
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -O2

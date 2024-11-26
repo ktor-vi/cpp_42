@@ -3,6 +3,7 @@
 #include <iomanip>
 #include <iostream>
 #include <float.h>
+#include <cmath>
 #include <limits.h>
 #include <stdlib.h>
 ScalarConverter::ScalarConverter() {
@@ -33,6 +34,13 @@ void static display(char c, int i, float f, double d){
     std::cout << "Impossible";
   std::cout << std::endl;
   std::cout << "Integer : " << i << std::endl;
+  std::cout << "Float : " << std::fixed << std::setprecision(1) << f << "f"<< std::endl;
+  std::cout << "Double : " << std::fixed << std::setprecision(1) << d << std::endl;
+}
+
+void static displayInfinite(float f, double d){
+  std::cout << "Char : Impossible" << std::endl;
+  std::cout << "Int : Impossible" << std::endl;
   std::cout << "Float : " << std::fixed << std::setprecision(1) << f << "f"<< std::endl;
   std::cout << "Double : " << std::fixed << std::setprecision(1) << d << std::endl;
 }
@@ -94,6 +102,36 @@ void ScalarConverter::convert(std::string literal){
     double id = static_cast<double>(ii);
     display(ic, ii, ifv, id);
   }
+  }
+  else if(!literal.compare("-inff"))
+  {
+    float minff = -INFINITY;
+    double minfd = static_cast<double>(minff);
+    displayInfinite(minff, minfd);
+  }
+  else if(!literal.compare("+inff"))
+  {
+    float inff = +INFINITY;
+    double infd = static_cast<double>(inff);
+    displayInfinite(inff, infd);
+  }
+  else if(!literal.compare("+inf"))
+  {
+    double infdd = +INFINITY;
+    float infdf = static_cast<float>(infdd);
+    displayInfinite(infdf, infdd);
+  }
+  else if(!literal.compare("-inf"))
+  {
+    double minfdd = -INFINITY;
+    float minfdf = static_cast<float>(minfdd);
+    displayInfinite(minfdf, minfdd);
+  }
+  else if(!literal.compare("nan"))
+  {
+    double nandd = std::nan("");
+    float nandf = static_cast<float>(nandd);
+    displayInfinite(nandd, nandf);
   }
   else{
     std::cout << "Not castable" << std::endl;
