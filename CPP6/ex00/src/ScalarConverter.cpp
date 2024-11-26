@@ -1,5 +1,4 @@
 #include "../includes/ScalarConverter.hpp"
-#include <algorithm>
 #include <iomanip>
 #include <iostream>
 #include <float.h>
