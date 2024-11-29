@@ -3,6 +3,10 @@
 
 int main(void)
 {
-   int * a = new int();
-  std::cout << *a << std::endl; 
+   Array<int> arr = Array<int>();
+   Array<float> arr2 = Array<float>(5);
+
+  std::cout << arr2[2] << std::endl; 
+  arr2[2] = 2.42f;
+  std::cout << arr2[2] << std::endl; 
 }
