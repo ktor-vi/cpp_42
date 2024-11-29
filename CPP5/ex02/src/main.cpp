@@ -4,29 +4,33 @@
 #include "../includes/ShrubberyCreationForm.hpp"
 #include <iostream>
 
+//Shrubbery    : 145, 137
+//Robotomy     : 72, 45
+//Presidential :  25, 5
 int main(void) {
   Bureaucrat ghislain("Ghislain", 4); 
   try {
     ShrubberyCreationForm form("home");
-
-    form.beSigned(ghislain);
-    form.execute(ghislain); 
+  
+    ghislain.signForm(form);
+    ghislain.executeForm(form);
   } catch (std::exception &e) {
     std::cerr << e.what() << std::endl;
   }
   try {
-    RobotomyRequestForm form2("Patrick");
+    RobotomyRequestForm form("Patrick");
 
-    form2.beSigned(ghislain); 
-    form2.execute(ghislain); 
+    ghislain.signForm(form);
+    ghislain.executeForm(form);
+
   } catch (std::exception &e) {
     std::cerr << e.what() << std::endl;
   }
   try {
-    PresidentialPardonForm form3("Patrick");
+    PresidentialPardonForm form("Patrick");
 
-    form3.beSigned(ghislain); 
-    form3.execute(ghislain);
+    ghislain.signForm(form);
+    ghislain.executeForm(form);
   } catch (std::exception &e) {
     std::cerr << e.what() << std::endl;
   }

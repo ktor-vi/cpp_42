@@ -39,7 +39,7 @@ void AForm::beSigned(Bureaucrat &bureaucrat)
 }
 
 
-void AForm::execute(Bureaucrat &bureaucrat) {
+void AForm::execute(Bureaucrat &bureaucrat) const {
     if (!this->_signed) {
         throw AForm::FormNotSignedException();
     }

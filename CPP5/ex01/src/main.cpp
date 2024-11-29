@@ -4,10 +4,11 @@
 
 int main(void) {
 
-  Bureaucrat *patrick = new Bureaucrat("Patrick", 1);
-  Bureaucrat *bernard= new Bureaucrat("Bernard", 120);
+  try {
   // Form *A36 = new Form("A38", 0, 2);
   // Form *A37 = new Form("A38", 3, 151);
+  Bureaucrat *patrick = new Bureaucrat("Patrick", 1);
+  Bureaucrat *bernard= new Bureaucrat("Bernard", 120);
   Form *A38 = new Form("A38", 3, 2);
   Form *A39 = new Form("A39", 10, 25);
   std::cout << *A38 << std::endl;
@@ -20,4 +21,7 @@ int main(void) {
   delete bernard;
   delete A38;
   delete A39;
+  } catch (std::exception &e) {
+    std::cout << e.what() << std::endl; 
+  }
 }

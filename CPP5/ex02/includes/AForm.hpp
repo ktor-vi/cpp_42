@@ -10,6 +10,7 @@ private:
   const int _signGrade;
   const int _execGrade;
   bool _signed;
+  AForm();
 protected:  
   virtual void executeAction() const = 0;
 public:
@@ -23,7 +24,7 @@ public:
   bool getSignedStatus() const;
   std::string getName() const;
   void beSigned(Bureaucrat &bureaucrat);
-  void execute(Bureaucrat &bureaucrat);
+  void execute(Bureaucrat &bureaucrat) const;
 
   class GradeTooLowException : public std::exception {
   public:

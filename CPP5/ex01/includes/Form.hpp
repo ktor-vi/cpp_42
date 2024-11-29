@@ -10,6 +10,7 @@ private:
   const int _signGrade;
   const int _execGrade;
   bool _signed;
+  Form();
 
 public:
   Form(std::string name, const int signGrade, const int execGrade);
