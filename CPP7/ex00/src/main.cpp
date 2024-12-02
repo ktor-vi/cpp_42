@@ -1,4 +1,4 @@
-#include "../includes/Functions.tpp.cpp"
+#include "../includes/Functions.hpp"
 #include <iostream>
 
 int main(void) {
