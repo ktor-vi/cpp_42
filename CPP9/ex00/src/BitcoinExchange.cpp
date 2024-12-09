@@ -2,6 +2,7 @@
 
 time_t parseDateTime(const char *datetimeString, const char *format) {
   struct tm tmStruct;
+  memset(&tmStruct, 0, sizeof(tmStruct));
   strptime(datetimeString, format, &tmStruct);
   return mktime(&tmStruct);
 }
@@ -32,5 +33,23 @@ bool validateDateTime(std::string dateTimeString) {
   else if ((year % 4 == 0 && year % 100 != 0) && months == 2 && days > 29)
     return (false);
 
+  return true;
+}
+
+bool validateField(std::string line) {
+  if (!std::strcmp("date | value", line.c_str()))
+    return true;
+  if (!validateDateTime(line.substr(0, line.find("|") - 1)))
+    return false;
+
+  for (size_t i = 0; i < line.length(); i++) {
+    if (!isdigit(line[i]) && line[i] != ' ' && line[i] != '|' &&
+        line[i] != '-' && line[i] != '.' && line[i] != '\n') {
+      return false;
+    }
+  }
+  if (line.find("|") != 11 &&
+      (line[line.find("|") - 1] != ' ' || line[line.find("|") + 1] != ' '))
+    return (false);
   return true;
 }
