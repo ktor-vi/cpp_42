@@ -1,5 +1,5 @@
 # Nom de l'exécutable
-TARGET = easyfind
+TARGET = MutantStack
 
 # Compilateur et options de compilation
 CXX = c++

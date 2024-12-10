@@ -1,6 +1,5 @@
 # Nom de l'exécutable
-TARGET = easyfind
-
+TARGET = Forms
 # Compilateur et options de compilation
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -O2
@@ -17,9 +16,8 @@ NC = \033[0m
 SRC_DIR = src
 BUILD_DIR = objs
 
-# Fichiers sources, templates et objets
+# Fichiers sources et objets
 SOURCES = $(wildcard $(SRC_DIR)/*.cpp)
-TEMPLATES = $(wildcard $(SRC_DIR)/*.tpp)
 OBJECTS = $(patsubst $(SRC_DIR)/%.cpp, $(BUILD_DIR)/%.o, $(SOURCES))
 
 # Nombre total de fichiers à compiler (pour la barre de progression)
@@ -29,16 +27,16 @@ TOTAL = $(words $(SOURCES))
 all: $(TARGET)
 
 $(TARGET): $(OBJECTS)
-	@echo "$(BLUE)Linking...$(NC)"
+	@echo  "$(BLUE)Linking...$(NC)"
 	@$(CXX) $(OBJECTS) -o $@ $(LDFLAGS)
-	@echo "$(GREEN)Done!$(NC)"
+	@echo  "$(GREEN)Done!$(NC)"
 
 # Compilation des fichiers objets avec une barre de progression
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp $(TEMPLATES) | $(BUILD_DIR)
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp | $(BUILD_DIR)
 	$(eval CURRENT := $(shell echo $$(($(PROGRESS)+1))))
-	@echo "$(YELLOW)[$(CURRENT)/$(TOTAL)] Compiling $<... $(NC)"
+	@echo  "$(YELLOW)[$(CURRENT)/$(TOTAL)] Compiling $<... $(NC)"
 	@$(CXX) $(CXXFLAGS) -c $< -o $@
-	@echo "$(GREEN)OK$(NC)"
+	@echo  "$(GREEN)OK$(NC)"
 	$(eval PROGRESS := $(CURRENT))
 
 # Crée le dossier build si nécessaire
@@ -47,17 +45,16 @@ $(BUILD_DIR):
 
 # Nettoyage
 clean:
-	@echo "$(RED)Cleaning objects...$(NC)"
-	@rm -rf $(BUILD_DIR)/*.o
-	@echo "$(GREEN)Cleaned!$(NC)"
+	@echo  "$(RED)Cleaning objects...$(NC)"
+	@rm -rf $(BUILD_DIR)/*.o $(TARGET)
+	@echo  "$(GREEN)Cleaned!$(NC)"
 
-fclean: clean
-	@echo "$(RED)Cleaning binary...$(NC)"
+fclean:	clean
+	@echo  "$(RED)Cleaning binary...$(NC)"
 	@rm -rf $(TARGET)
-	@echo "$(GREEN)Cleaned!$(NC)"
+	@echo  "$(GREEN)Cleaned!$(NC)"
 
 re: fclean all
-
 # Variables pour le suivi de la progression
 PROGRESS := 0
 
