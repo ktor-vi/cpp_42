@@ -28,6 +28,8 @@ bool validateDateTime(std::string dateTimeString) {
   int days = atoi(dateTimeString.substr(ds + 1, 2).c_str());
   if (months < 0 || days < 0 || months > 12 || days > 31)
     return false;
+  if ((months == 4 || months == 6 || months == 9 || months == 11) && days > 30)
+    return (false);
   if (!(year % 4 == 0 && year % 100 != 0) && months == 2 && days > 28)
     return false;
   else if ((year % 4 == 0 && year % 100 != 0) && months == 2 && days > 29)

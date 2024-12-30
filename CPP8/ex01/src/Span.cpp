@@ -33,6 +33,18 @@ void Span::addNumber(int n) {
     throw MaxNumbersException();
 }
 
+void Span::addNumber(std::vector<int>::const_iterator head, std::vector<int>::const_iterator tail) {
+  for(std::vector<int>::const_iterator it = head; it != tail; it++)
+  {
+  this->vec.push_back(*it);
+  this->size++;
+  if (this->size > this->maxNumbers)
+    {
+    throw MaxNumbersException();
+      break;
+    }
+  }
+}
 int Span::shortestSpan() {
   if (this->size < 2)
     throw MinNumbersException();

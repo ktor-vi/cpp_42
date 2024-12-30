@@ -1,6 +1,10 @@
 #include "../includes/Span.hpp"
-#include <iostream>
 
+#include <iostream>
+#include <vector>
+#include <cstdlib>
+#include <ctime>
+#include <limits.h>
 int main() {
   Span sp = Span(10);
 
@@ -15,21 +19,20 @@ int main() {
   sp.addNumber(9);
   sp.addNumber(11);
 
-  std::vector<int> lst;
-  lst.push_back(-2);
-
-  try {
-    sp.addNumber(lst);
-  } catch (std::exception &e) {
-    std::cout << e.what() << std::endl;
-  }
 
   std::cout << sp.shortestSpan() << std::endl;
   std::cout << sp.longestSpan() << std::endl;
 
-  Span sp2 = Span(1);
-  sp2.addNumber(lst);
+  Span sp2 = Span(10000);
+    std::vector<int> values(10000);
+ std::srand(time(0)); 
+
+    for (std::vector<int>::iterator it = values.begin(); it != values.end(); ++it) {
+        *it = std::rand() % INT_MAX; 
+    }
+
   try {
+    sp2.addNumber(values.begin(), values.end());
     std::cout << sp2.shortestSpan() << std::endl;
     std::cout << sp2.longestSpan() << std::endl;
   } catch (std::exception &e) {

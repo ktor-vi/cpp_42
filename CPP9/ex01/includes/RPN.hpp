@@ -1,5 +1,7 @@
-#include <cstdlib>
-#include <cstring>
-#include <iostream>
 #include <stack>
+#include <cstring>
 #include <string>
+#include <cstdlib>
+#include <iostream>
+
+std::stack<char> parseExpr(char *expr);

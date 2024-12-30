@@ -1,4 +1,5 @@
 #include <vector>
+#include <algorithm>
 
 #ifndef SPAN_HPP
 #define SPAN_HPP
@@ -9,6 +10,7 @@ public:
   Span(const Span &rhs);
   Span &operator=(const Span &rhs);
   void addNumber(int n);
+void addNumber(std::vector<int>::const_iterator head, std::vector<int>::const_iterator tail);
   int longestSpan();
   int shortestSpan();
   template <typename T> void addNumber(T range) {
