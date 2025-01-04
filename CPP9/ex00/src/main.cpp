@@ -57,7 +57,9 @@ int main(int argc, char **argv) {
       if (it->first >= date)
         break;
     }
-    std::cout << DateTime(date, "%Y-%m-%d") << " => " << std::setprecision(2)
+    it--;
+    std::cout << DateTime(date, "%Y-%m-%d")
+              << " => " /*<< std::setprecision(2)*/
               << value << " = " << it->second * value << std::endl;
     if (line.empty())
       break;
