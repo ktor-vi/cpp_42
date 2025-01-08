@@ -3,48 +3,62 @@
 #include <stack>
 #include <string>
 
-int main(int argc, char **argv)
-{
-  if ( argc != 2)
-  {
-      std::cout << "Error." << std::endl;
-      std::exit(1);
-  }
-  std::stack<char> st = parseExpr(argv[1]);
-  int res = st.top() - 48;
-  st.pop();
-  int n = st.top() - 48 ;
-  st.pop();
-  std::stack<int> rst;
-  while(!st.empty()) 
-  {
-  std::cout << "res: "<< res << " n : " << n << " i: "<< st.top() << std::endl;
-    if(!isdigit(st.top()))
-    {
-    if(st.top() == '+' )
-      res += n;
-    if(st.top() == '-' )
-      res -= n;
-    if(st.top() == '/' )
-      res /= n;
-    if(st.top() == '*' )
-      res *= n;
-    st.pop();
-    if(!st.empty() && !isdigit(st.top()))
-      {
-        n = rst.top();
-      }
-    }
-    else {
-    n = st.top() - 48;
-    st.pop();
-    if(!st.empty() && isdigit(st.top()))
-      {
-        rst.push(n);
-        n = st.top() - 48;
-      }
+#include <cstdlib>
+#include <iostream>
+#include <stack>
+#include <string>
 
-    }
+int main(int argc, char **argv) {
+  if (argc != 2) {
+    std::cout << "Error." << std::endl;
+    return 1;
   }
-  std::cout << res << std::endl;
+
+  std::stack<int> numbers;
+  std::string expr = argv[1];
+  std::string::iterator it = expr.begin();
+
+  while (it != expr.end()) {
+    if (*it == ' ') {
+      ++it;
+      continue;
+    }
+
+    if (isdigit(*it)) {
+      numbers.push(*it - '0');
+    } else {
+      if (numbers.size() < 2)
+        return 1;
+
+      int b = numbers.top();
+      numbers.pop();
+      int a = numbers.top();
+      numbers.pop();
+
+      switch (*it) {
+      case '+':
+        numbers.push(a + b);
+        break;
+      case '-':
+        numbers.push(a - b);
+        break;
+      case '*':
+        numbers.push(a * b);
+        break;
+      case '/':
+        if (b == 0)
+          return 1;
+        numbers.push(a / b);
+        break;
+      default:
+        return 1;
+      }
+    }
+    ++it;
+  }
+
+  if (numbers.size() != 1)
+    return 1;
+  std::cout << numbers.top() << std::endl;
+  return 0;
 }

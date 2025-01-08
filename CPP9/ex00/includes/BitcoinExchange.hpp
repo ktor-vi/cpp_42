@@ -1,5 +1,7 @@
 #include <climits>
+#include <cstdlib>
 #include <cstring>
+#include <fstream>
 #include <ctime>
 #include <string>
 time_t parseDateTime(const char *datetimeString, const char *format);

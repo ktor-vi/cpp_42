@@ -99,16 +99,24 @@ void lst_ford_johnson_sort(std::list<int> &lst) {
     }
   }
 
-  std::list<int>::iterator it1 = minimums.begin();
-  ++it1;
-  for (; it1 != minimums.end(); ++it1) {
+std::list<int>::iterator it1 = minimums.begin();
+++it1;
+for (; it1 != minimums.end(); ++it1) {
     int key = *it1;
     std::list<int>::iterator it2 = it1;
-    while (it2 != minimums.begin() && *std::prev(it2) > key) {
-      *it2 = *std::prev(it2);
-      --it2;
+
+    while (it2 != minimums.begin()) {
+        std::list<int>::iterator it_prev = it2;
+        --it_prev; 
+        if (*it_prev <= key) {
+            break;
+        }
+
+        *it2 = *it_prev; 
+        --it2;
     }
-    *it2 = key;
+
+    *it2 = key; 
   }
 
   std::vector<size_t> jacobsthal =

@@ -9,7 +9,7 @@ int main(int argc, char **argv) {
     return 1;
   }
   std::string filename = "data.csv";
-  std::ifstream data(filename);
+  std::ifstream data(filename.c_str());
   std::ifstream input(argv[1]);
   std::string line;
   std::map<time_t, double> btcValues;
